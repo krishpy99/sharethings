@@ -668,4 +668,148 @@ h2 {
     font-size: 1.5rem;
   }
 }
+
+/* Enhanced mobile styles */
+@media (max-width: 768px) {
+  .upload-container, .result-container {
+    padding: 1.8rem;
+  }
+  
+  h2 {
+    font-size: 1.6rem;
+  }
+  
+  .upload-description {
+    font-size: 0.95rem;
+  }
+  
+  .upload-box {
+    padding: 2rem 1rem;
+  }
+  
+  .upload-prompt {
+    font-size: 0.95rem;
+  }
+  
+  .upload-limit {
+    font-size: 0.8rem;
+  }
+  
+  .upload-button, .secondary-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.95rem;
+  }
+  
+  .qr-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .qr-code img {
+    max-width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .upload-container, .result-container {
+    padding: 1.2rem;
+  }
+  
+  h2 {
+    font-size: 1.4rem;
+  }
+  
+  .upload-description {
+    font-size: 0.9rem;
+    margin-bottom: 1.2rem;
+  }
+  
+  .upload-box {
+    padding: 1.5rem 0.8rem;
+    min-height: 150px;
+  }
+  
+  .upload-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .upload-prompt {
+    font-size: 0.85rem;
+    margin: 0.5rem 0;
+  }
+  
+  .upload-limit {
+    font-size: 0.75rem;
+  }
+  
+  .file-name {
+    font-size: 0.9rem;
+  }
+  
+  .file-size {
+    font-size: 0.8rem;
+  }
+  
+  .description-input {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+  
+  .upload-button, .secondary-button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  
+  .success-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .qr-code img {
+    max-width: 150px;
+  }
+  
+  .qr-instructions p {
+    font-size: 0.9rem;
+  }
+  
+  .share-label {
+    font-size: 0.9rem;
+  }
+  
+  .url-text {
+    font-size: 0.8rem;
+    padding: 0.6rem 0.8rem;
+    word-break: break-all;
+  }
+  
+  .copy-button {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .expiry-note {
+    font-size: 0.8rem;
+    padding: 0.6rem 1rem;
+    margin: 0.8rem 0 1.5rem;
+  }
+}
+
+/* Fix vertical spacing for very small screens */
+@media (max-width: 380px) {
+  .upload-box {
+    min-height: 130px;
+  }
+  
+  .qr-code img {
+    max-width: 130px;
+  }
+  
+  .qr-container {
+    gap: 0.8rem;
+  }
+}
 </style>

@@ -404,4 +404,117 @@ h2 {
     font-size: 1.5rem;
   }
 }
+
+/* Enhanced mobile styles */
+@media (max-width: 768px) {
+  .input-container, .result-container {
+    padding: 1.8rem;
+  }
+  
+  h2 {
+    font-size: 1.6rem;
+  }
+  
+  .description {
+    font-size: 0.95rem;
+  }
+  
+  .text-input {
+    padding: 0.8rem;
+    font-size: 0.95rem;
+  }
+  
+  .character-count {
+    font-size: 0.75rem;
+  }
+  
+  .generate-button, .action-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.95rem;
+  }
+  
+  .success-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+  
+  .qr-image {
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .input-container, .result-container {
+    padding: 1.2rem;
+  }
+  
+  h2 {
+    font-size: 1.4rem;
+  }
+  
+  .description {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .text-input {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+  
+  .character-count {
+    font-size: 0.7rem;
+    bottom: 0;
+    right: 0.5rem;
+  }
+  
+  .generate-button, .action-button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  
+  .success-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .qr-image {
+    max-width: 150px;
+  }
+  
+  .qr-display {
+    gap: 1.2rem;
+  }
+  
+  .text-preview h3 {
+    font-size: 0.9rem;
+  }
+  
+  .encoded-text {
+    font-size: 0.8rem;
+    max-height: 120px;
+  }
+  
+  .action-buttons {
+    gap: 0.7rem;
+  }
+}
+
+/* Fix vertical spacing for very small screens */
+@media (max-width: 380px) {
+  .qr-image {
+    max-width: 130px;
+  }
+  
+  .text-preview {
+    padding: 0.7rem;
+  }
+  
+  .encoded-text {
+    max-height: 100px;
+  }
+}
 </style>

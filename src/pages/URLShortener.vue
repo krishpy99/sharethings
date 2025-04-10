@@ -545,4 +545,105 @@ h3 {
     font-size: 1.5rem;
   }
 }
+
+/* Enhanced mobile styles */
+@media (max-width: 768px) {
+  .input-container, .result-container {
+    padding: 1.8rem;
+  }
+  
+  h2 {
+    font-size: 1.6rem;
+  }
+  
+  .description {
+    font-size: 0.95rem;
+  }
+  
+  .url-input {
+    padding: 0.8rem;
+    font-size: 0.95rem;
+  }
+  
+  .error-message {
+    font-size: 0.85rem;
+  }
+  
+  .shorten-button, .new-url-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.95rem;
+  }
+  
+  .success-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+  
+  .qr-image {
+    max-width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .input-container, .result-container {
+    padding: 1.2rem;
+  }
+  
+  h2 {
+    font-size: 1.4rem;
+  }
+  
+  .description {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .url-input {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+  
+  .shorten-button, .new-url-button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  
+  .success-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .qr-image {
+    max-width: 130px;
+  }
+  
+  .result-content {
+    gap: 0.5rem;
+  }
+  
+  .url-text {
+    font-size: 0.8rem;
+    padding: 0.6rem 0.8rem;
+    word-break: break-all;
+  }
+
+  .shortened-url-text {
+    font-size: 0.8rem;
+    padding: 0.6rem 0.8rem;
+  }
+  
+  .copy-button {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .expiry-note {
+    font-size: 0.8rem;
+    padding: 0.6rem 1rem;
+    margin: 0.8rem 0 1.5rem;
+  }
+}
 </style>

@@ -519,5 +519,170 @@ export default {
     padding: 0.3rem 0.6rem;
     font-size: 0.8rem;
   }
+
+  .pagination-controls {
+    margin: 1.5rem 0 0.8rem;
+  }
+  
+  .page-button {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.85rem;
+  }
+  
+  .page-info {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .manage-container {
+    padding: 1.2rem;
+  }
+  
+  .tab {
+    padding: 0.7rem 1rem;
+    font-size: 0.85rem;
+  }
+  
+  /* Converting table to card view for small screens */
+  .data-table {
+    border: none;
+    background: none;
+    box-shadow: none;
+  }
+  
+  .data-table thead {
+    display: none; /* Hide table header */
+  }
+  
+  .data-table tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .data-table tr {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-background);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    padding: 1rem;
+    box-shadow: var(--shadow-small);
+    position: relative;
+  }
+  
+  .data-table td {
+    display: flex;
+    padding: 0.5rem 0;
+    border: none;
+    font-size: 0.85rem;
+    position: relative;
+  }
+  
+  /* Adding pseudo labels for mobile view */
+  .data-table td:nth-child(1)::before {
+    content: "Hash: ";
+    font-weight: 600;
+    width: 90px;
+    flex-shrink: 0;
+  }
+  
+  .data-table td:nth-child(2)::before {
+    content: "Type: ";
+    font-weight: 600;
+    width: 90px;
+    flex-shrink: 0;
+  }
+  
+  .data-table td:nth-child(3)::before {
+    content: "Description: ";
+    font-weight: 600;
+    width: 90px;
+    flex-shrink: 0;
+  }
+  
+  .data-table td:nth-child(4)::before {
+    content: "Created: ";
+    font-weight: 600;
+    width: 90px;
+    flex-shrink: 0;
+  }
+  
+  .data-table td:nth-child(5)::before {
+    content: "Expires: ";
+    font-weight: 600;
+    width: 90px;
+    flex-shrink: 0;
+  }
+  
+  .data-table .action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 0.8rem;
+    margin-top: 0.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+  
+  .data-table .action-buttons::before {
+    content: "";
+  }
+
+  .empty-message {
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .manage-container {
+    padding: 1rem;
+  }
+  
+  .tabs {
+    margin-bottom: 1.2rem;
+  }
+  
+  .tab {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .loading {
+    padding: 2rem;
+    margin: 1rem 0;
+  }
+  
+  .data-table tr {
+    padding: 0.8rem;
+  }
+  
+  .data-table td {
+    font-size: 0.8rem;
+    padding: 0.4rem 0;
+  }
+  
+  .data-table td::before {
+    width: 80px;
+    font-size: 0.8rem;
+  }
+  
+  .view-button, .delete-button {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  
+  .pagination-controls {
+    margin: 1.2rem 0 0.5rem;
+  }
+  
+  .page-button {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.8rem;
+  }
+  
+  .page-info {
+    font-size: 0.8rem;
+  }
 }
 </style>

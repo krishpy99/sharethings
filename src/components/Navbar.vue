@@ -7,7 +7,18 @@
         </router-link>
       </div>
       
-      <div class="nav-links">
+      <!-- Mobile menu button -->
+      <button @click="toggleMobileMenu" class="mobile-menu-button">
+        <svg v-if="!mobileMenuOpen" class="menu-icon" viewBox="0 0 24 24" width="24" height="24">
+          <path fill="currentColor" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+        </svg>
+        <svg v-else class="menu-icon" viewBox="0 0 24 24" width="24" height="24">
+          <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+        </svg>
+      </button>
+      
+      <!-- Desktop navigation -->
+      <div class="nav-links desktop-nav">
         <router-link to="/upload" custom v-slot="{ href, navigate, isExactActive }">
           <a :href="href" @click="navigate" class="nav-link" :class="{'active': isExactActive}">Upload File</a>
         </router-link>
@@ -22,7 +33,7 @@
         </router-link>
       </div>
       
-      <div class="nav-actions">
+      <div class="nav-actions desktop-nav">
         <div class="search-container">
           <input 
             v-model="fileHash" 
@@ -71,6 +82,75 @@
       </div>
     </div>
 
+    <!-- Mobile side drawer -->
+    <div class="mobile-side-drawer" :class="{'open': mobileMenuOpen}">
+      <div class="mobile-drawer-content">
+        <div class="mobile-nav-links">
+          <router-link @click="closeMobileMenu" to="/upload" custom v-slot="{ href, navigate, isExactActive }">
+            <a :href="href" @click="navigate" class="mobile-nav-link" :class="{'active': isExactActive}">Upload File</a>
+          </router-link>
+          <router-link @click="closeMobileMenu" to="/text" custom v-slot="{ href, navigate, isExactActive }">
+            <a :href="href" @click="navigate" class="mobile-nav-link" :class="{'active': isExactActive}">Text to QR</a>
+          </router-link>
+          <router-link @click="closeMobileMenu" to="/url" custom v-slot="{ href, navigate, isExactActive }">
+            <a :href="href" @click="navigate" class="mobile-nav-link" :class="{'active': isExactActive}">URL Shortener</a>
+          </router-link>
+          <router-link @click="closeMobileMenu" to="/manage" custom v-slot="{ href, navigate, isExactActive }">
+            <a :href="href" @click="navigate" class="mobile-nav-link" :class="{'active': isExactActive}">Manage Files</a>
+          </router-link>
+        </div>
+        
+        <div class="mobile-search">
+          <input 
+            v-model="fileHash" 
+            placeholder="Enter file hash..." 
+            class="mobile-search-input"
+          />
+          <button @click="mobileViewFile" class="mobile-search-button">View</button>
+        </div>
+        
+        <div class="mobile-drawer-actions">
+          <div class="mobile-theme-toggle">
+            <button @click="toggleDarkMode" class="mobile-theme-button">
+              <svg v-if="isDarkMode" class="theme-icon" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="currentColor" d="M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0 c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2 c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1 S11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0 s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06 c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41 c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36 c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z" />
+              </svg>
+              <svg v-else class="theme-icon" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="currentColor" d="M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36c-0.98,1.37-2.58,2.26-4.4,2.26 c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z" />
+              </svg>
+              <span>{{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}</span>
+            </button>
+          </div>
+          
+          <div class="mobile-auth-buttons" v-if="!isAuthenticated">
+            <button @click="handleSignIn" class="mobile-auth-button sign-in">Sign In</button>
+            <button @click="handleSignUp" class="mobile-auth-button sign-up">Sign Up</button>
+          </div>
+          
+          <div class="mobile-user-profile" v-else>
+            <div class="mobile-user-info">
+              <div v-if="userDetails?.imageUrl" class="mobile-user-image">
+                <img :src="userDetails.imageUrl" alt="Profile" />
+              </div>
+              <div v-else class="mobile-user-avatar">{{ userInitials }}</div>
+              <div class="mobile-user-details">
+                <div class="mobile-user-name">{{ userDetails?.fullName }}</div>
+                <div class="mobile-user-email">{{ userDetails?.email }}</div>
+              </div>
+            </div>
+            <button @click="handleSignOut" class="mobile-auth-button sign-out">Sign Out</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overlay when side drawer is open -->
+    <div 
+      v-if="mobileMenuOpen" 
+      class="mobile-overlay" 
+      @click="closeMobileMenu">
+    </div>
+
     <!-- File Viewer Modal -->
     <div v-if="showFileViewer" class="modal-overlay">
       <div class="modal-content">
@@ -101,17 +181,47 @@ export default {
     const userDetails = ref(null);
     const showProfileMenu = ref(false);
     const isDarkMode = ref(false);
+    const mobileMenuOpen = ref(false);
 
     // Check authentication status on mount
     onMounted(() => {
       checkAuthStatus();
       document.addEventListener('click', handleOutsideClick);
       initTheme();
+      
+      // Add event listener to close mobile menu when escape key is pressed
+      document.addEventListener('keydown', handleEscapeKey);
     });
 
     onBeforeUnmount(() => {
       document.removeEventListener('click', handleOutsideClick);
+      document.removeEventListener('keydown', handleEscapeKey);
     });
+
+    // Handle escape key press to close mobile menu
+    const handleEscapeKey = (event) => {
+      if (event.key === 'Escape' && mobileMenuOpen.value) {
+        closeMobileMenu();
+      }
+    };
+
+    // Toggle mobile menu
+    const toggleMobileMenu = () => {
+      mobileMenuOpen.value = !mobileMenuOpen.value;
+      
+      // Prevent body scrolling when menu is open
+      if (mobileMenuOpen.value) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    };
+
+    // Close mobile menu
+    const closeMobileMenu = () => {
+      mobileMenuOpen.value = false;
+      document.body.style.overflow = '';
+    };
 
     // Initialize theme based on localStorage or system preference
     const initTheme = () => {
@@ -220,6 +330,12 @@ export default {
       }
     };
 
+    // Mobile view file function - also closes the mobile menu
+    const mobileViewFile = async () => {
+      await viewFile();
+      closeMobileMenu();
+    };
+
     const closeFileViewer = () => {
       showFileViewer.value = false;
       fileHash.value = '';
@@ -228,11 +344,13 @@ export default {
     const handleSignIn = async () => {
       await signIn();
       checkAuthStatus();
+      closeMobileMenu();
     };
 
     const handleSignUp = async () => {
       await signUp();
       checkAuthStatus();
+      closeMobileMenu();
     };
 
     const handleSignOut = async () => {
@@ -241,12 +359,14 @@ export default {
       userId.value = null;
       userDetails.value = null;
       showProfileMenu.value = false;
+      closeMobileMenu();
     };
 
     return {
       fileHash,
       showFileViewer,
       viewFile,
+      mobileViewFile,
       closeFileViewer,
       fileViewer,
       isAuthenticated: computed(() => authenticated.value),
@@ -259,7 +379,10 @@ export default {
       handleSignUp,
       handleSignOut,
       isDarkMode,
-      toggleDarkMode
+      toggleDarkMode,
+      mobileMenuOpen,
+      toggleMobileMenu,
+      closeMobileMenu
     };
   }
 };
@@ -646,6 +769,212 @@ export default {
   width: 24px;
 }
 
+/* Mobile menu button */
+.mobile-menu-button {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--color-text);
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 150;
+}
+
+.menu-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Mobile side drawer styles */
+.mobile-side-drawer {
+  position: fixed;
+  top: 0;
+  right: -300px; /* Start offscreen */
+  width: 280px;
+  height: 100vh;
+  background-color: var(--color-background);
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 200;
+  transition: right 0.3s ease;
+  overflow-y: auto;
+}
+
+.mobile-side-drawer.open {
+  right: 0;
+}
+
+.mobile-drawer-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.mobile-nav-link {
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+  display: block;
+}
+
+.mobile-nav-link:hover {
+  background-color: var(--color-border);
+}
+
+.mobile-nav-link.active {
+  font-weight: 600;
+  background-color: var(--color-border);
+}
+
+.mobile-search {
+  margin: 1rem 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mobile-search-input {
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+.mobile-search-button {
+  padding: 0.8rem 1rem;
+  background-color: var(--color-text);
+  color: var(--color-background);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+}
+
+.mobile-drawer-actions {
+  margin-top: auto;
+  border-top: 1px solid var(--color-border);
+  padding-top: 1.5rem;
+}
+
+.mobile-theme-toggle {
+  margin-bottom: 1.5rem;
+}
+
+.mobile-theme-button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: none;
+  border: none;
+  color: var(--color-text);
+  font-size: 1rem;
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  border-radius: 8px;
+}
+
+.mobile-theme-button:hover {
+  background-color: var(--color-border);
+}
+
+.mobile-auth-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.mobile-auth-button {
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  width: 100%;
+}
+
+.mobile-user-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mobile-user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 0;
+}
+
+.mobile-user-image img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.mobile-user-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #333;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.mobile-user-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.mobile-user-name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.mobile-user-email {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+/* Overlay that appears when mobile menu is open */
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 150;
+  backdrop-filter: blur(2px);
+}
+
 @keyframes slide-up {
   from {
     opacity: 0;
@@ -657,14 +986,32 @@ export default {
   }
 }
 
-/* Make responsive for smaller screens */
+/* Media queries for responsive design */
 @media (max-width: 1100px) {
   .navbar-container {
-    flex-direction: column;
-    gap: 1rem;
+    flex-wrap: wrap;
     padding: 1rem;
   }
+}
+
+/* Media query for tablet/mobile */
+@media (max-width: 900px) {
+  .desktop-nav {
+    display: none;
+  }
   
+  .mobile-menu-button {
+    display: flex;
+  }
+  
+  .navbar-container {
+    justify-content: space-between;
+    padding: 0.8rem 1rem;
+  }
+}
+
+/* Older styles kept for compatibility */
+@media (max-width: 1100px) {
   .nav-links {
     justify-content: center;
     flex-wrap: wrap;

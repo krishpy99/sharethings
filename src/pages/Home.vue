@@ -404,4 +404,44 @@ h1 span {
     text-align: center;
   }
 }
+
+/* Added more specific mobile styles for smaller screens */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .tagline {
+    font-size: 1rem;
+  }
+  
+  .hero {
+    padding: 1rem 0 2rem;
+  }
+  
+  .features {
+    padding: 2rem 0;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .feature-card {
+    padding: 1.5rem;
+  }
+  
+  .get-started {
+    padding: 2rem 0;
+  }
+  
+  .get-started h2 {
+    font-size: 1.8rem;
+  }
+  
+  .file-animation {
+    height: 200px;
+  }
+}
 </style>
