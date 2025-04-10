@@ -1,0 +1,20 @@
+[build]
+  command = "npm run build" # or "yarn build"
+  publish = "dist" # Vite's default output directory
+
+# This ensures all routes are directed to index.html for client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  
+# These ensure JavaScript files are served with correct MIME type
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Content-Type = "application/javascript"
+
+[[headers]]
+  for = "/*.mjs"
+  [headers.values]
+    Content-Type = "application/javascript"

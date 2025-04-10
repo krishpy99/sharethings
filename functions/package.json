@@ -1,0 +1,20 @@
+{
+  "name": "share-things",
+  "version": "1.0.0",
+  "description": "Consolidated Lambda function for file operations, QR generation, URL shortening, and PostgreSQL helpers",
+  "main": "index.js",
+  "dependencies": {
+    "qrcode": "^1.5.1",
+    "@aws-sdk/client-s3": "^3.100.0",
+    "pg": "^8.7.3",
+    "uuid": "^8.3.2",
+    "crypto": "^1.0.1",
+    "jsonwebtoken": "^9.0.0",
+    "jwk-to-pem": "^2.0.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
