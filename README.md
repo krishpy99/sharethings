@@ -1,76 +1,56 @@
-# QR Code File Sharing App
+# ShareThings
 
-A Vue 3 application for sharing files using QR codes. This app allows users to:
-
-- Upload files and generate QR codes for sharing
-- View shared files using a hash or URL
-- Manage uploaded files (for authenticated users)
+ShareThings is a simple service for uploading files and shortening URLs, with optional QR code generation for easy sharing. It combines a file-sharing tool with a URL shortener and supports user-specific management through Clerk.js authentication.
 
 ## Features
+- File uploads with size limit (5MB).
+- URL shortening for easy sharing.
+- QR code generation for any URL or text.
+- Optional user authentication for managing uploads.
+- Automatic expiration and deletion of files.
 
-- File upload with size limit (5MB)
-- QR code generation for easy sharing
-- File preview for images and PDFs
-- File management interface
-- Responsive design
+## Architecture
+ShareThings follows a serverless approach:
+1. Clerk.js handles user authentication (users can stay anonymous or log in).
+2. AWS API Gateway routes requests to AWS Lambda functions.
+3. Lambda functions handle:
+   - File uploads (using S3 for storage).
+   - Metadata and URL mappings (using a relational database like RDS).
+   - QR code generation.
+4. Responses are sent back via the API Gateway.
 
-## Project Structure
+## Core Entities
+- **User**: Anonymous or authenticated (via Clerk.js).
+- **URL Mapping**: Stores info about files or shortened URLs, including expiration, content type, and descriptions.
 
-```
-src/
-├── components/
-│   ├── QRCodeGenerator.vue
-│   ├── FileUploader.vue
-│   ├── FileViewer.vue
-│   └── FileList.vue
-├── pages/
-│   ├── HomePage.vue
-│   ├── UploadPage.vue
-│   ├── ViewPage.vue
-│   └── ManagePage.vue
-├── utils/
-│   ├── api.js
-│   └── auth.js
-├── App.vue
-└── main.js
-```
+## Endpoints
+- **POST /upload**  
+  Uploads a file to S3 and returns a sharable hash.
+- **POST /shorten**  
+  Shortens a given URL and returns the shortened hash.
+- **POST /generate**  
+  Generates a QR code for supplied text or URL.
+- **GET /view/:hash**  
+  Retrieves and optionally previews a file by hash.
+- **GET /r/:hash**  
+  Redirects from a shortened hash to the original URL.
+- **GET /manage**  
+  Lists and manages resources associated with a user.
 
-## Setup
+## Getting Started
+1. Install dependencies:  
+   ```bash
+   npm install
+   ```
+2. Create a .env file containing your environment variables (e.g., API endpoints).
+3. Start development server:  
+   ```bash
+   npm run dev
+   ```
+4. Build for production:  
+   ```bash
+   npm run build
+   ```
 
-1. Install dependencies:
-```bash
-npm install
-```
-
-2. Create a `.env` file in the root directory with your API URL:
-```
-VITE_API_URL=http://your-api-url
-```
-
-3. Start the development server:
-```bash
-npm run dev
-```
-
-4. Build for production:
-```bash
-npm run build
-```
-
-## Dependencies
-
-- Vue 3
-- Axios
-- QRCode.js
-
-## API Integration
-
-The app uses the following API endpoints:
-
-- POST `/` - Upload a file
-- GET `/?hash={hash}` - Get a file by hash
-- DELETE `/?hash={hash}&userId={userId}` - Delete a file
-
-## Environment Variables
-
-- `VITE_API_URL`: The base URL for the API (default: http://localhost:3000)
+## Contributing
+Pull requests and issues are welcome. For major changes, please discuss them first. Thank you for using and improving ShareThings!
